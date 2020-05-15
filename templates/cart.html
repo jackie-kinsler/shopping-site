@@ -13,25 +13,20 @@
         </tr>
         </thead>
         <tbody>
-        {% for cart_item in session['cart'] %}
+
+        {% for order, qty in melon_orders %}
             <tr>
-                <td>cart_item.common_name</td>
-                <td>{{ session['cart'][cart_item] }}</td>
-                <td>cart_item.price</td>
-                <td>(cart_item.price)*(session['cart'][cart_item])</td>
+                <td>{{ order.common_name }}</td>
+                <td>{{ qty }}</td>
+                <td>${{ "%.2f" | format(order.price) }}</td>
+                <td>${{ "%.2f" | format(order.price*qty) }}</td>
             </tr>
         {% endfor %}
-        <tr>
-            <td>Ancient Watermelon</td>
-            <td>5</td>
-            <td>$3.00</td>
-            <td>$15.00</td>
-        </tr>
-        
+
         </tbody>
     </table>
 
-    <h3>Total: $27.00</h3>
+    <h3>Total: ${{ "%.2f" | format(order_total) }}</h3>
 
     <a href="/checkout" class="btn btn-large btn-primary">Check Out</a>
 
